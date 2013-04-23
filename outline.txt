@@ -49,8 +49,7 @@
 # initialize(location)
 #
 # move(@board)
-#    - ##check if on the board
-#    - ##check for own player on end point
+#    - #
 #
 # display self
 #
@@ -61,6 +60,9 @@
 # next_legal_moves
 #
 # custom_move(board)
+      #generate all moves in all directions
+          --> #check if on the board
+#    - ##check for own player on end point
 #     ## super + own constraints on move
 #    - ##check if in path
 #    - ##check if puts own king in check

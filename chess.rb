@@ -1,4 +1,5 @@
 class Board
+  attr_accessor :grid
 
   def initialize
     @grid = Array.new(8) { Array.new(8) {nil} }
@@ -74,7 +75,7 @@ class Pawn < Piece
     y = location[0]
     x = location[1]
     if @player_id == "White"
-      @deltas = [y-1,x],[y-1,x-1],[y-1,x+1]]
+      @deltas = [[y-1,x],[y-1,x-1],[y-1,x+1]]
     else
       @deltas = [[y+1,x],[y+1,x-1],[y+1,x+1]]
     end
@@ -90,7 +91,7 @@ class Pawn < Piece
   end
 
   def generate_possible_moves(board)
-    deltas = generate_possible_deltas
+    deltas = generate_deltas
 
     on_board_moves = on_board(deltas)
     self_square_moves = self_squares(on_board_moves, board)
@@ -122,15 +123,18 @@ class Pawn < Piece
   end
 
   def enemy_squares(self_square_moves, board)
+    # pawn has a lot of rules
     self_square_moves.select do |move|
       y = move[0]
       x = move[1]
 
-      if board.grid[y][x].nil?
-        true
-      elsif x == self.location[1]
+      if board.grid[y][x].nil? && x != self.location[1]
         false
-      else
+      elsif board.grid[y][x] && x != self.location[1]
+        true
+      elsif board.grid[y][x] && x == self.location[1]
+        false
+      elsif board.grid[y][x].nil? && x == self.location[1]
         true
       end
     end

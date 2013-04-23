@@ -23,21 +23,45 @@ class Board
     end
   end
 
-end
+  def update_board(start, stop)
+    y1 = start[0]
+    x1 = start[1]
+    y2 = stop[0]
+    x2 = stop[1]
+
+    piece = @grid[y1][x1]
+    @grid[y1][x1] = nil
+
+    #check if position he will take is occupied
+
+    @grid[y2][x2] = piece
+    piece.location = [y2, x2]
+  end
+
+  def validate_move(start, stop)
+
+  end
+
+end #End of board class
+
 
 class Piece
+
+  attr_accessor :location
 
   def initialize(location)
     @location = location #array of [x, y]
     @location[0] > 5  ? @player_id = "White" : @player_id = "Black"
   end
 
-  def display_self
-
+  def move(board)
   end
+
 end
 
 class Pawn < Piece
+
+  attr_accessor :location
 
   def initialize(location)
     super(location)
@@ -46,6 +70,12 @@ class Pawn < Piece
   def display_self
     print "P|"
   end
+
+  def move(board)
+    board = board
+  end
+
+  #legal moves - white pawns must move up one y only. Can move one diagonal if another piece in there.
 end
 
 

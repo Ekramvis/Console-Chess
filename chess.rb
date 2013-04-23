@@ -39,7 +39,8 @@ class Board
   end
 
   def validate_move(start, stop)
-    @grid[start[0], start[1]].move(self, stop)
+    valid_moves = @grid[start[0]][start[1]].move(self)
+    valid_moves.include?(stop)
   end
 
 end #End of board class
@@ -84,9 +85,7 @@ class Pawn < Piece
     print "P|"
   end
 
-  def move(board, stop)
-    y = stop[0]
-    x = stop[1]
+  def move(board)
     generate_possible_moves(board)
   end
 
@@ -94,9 +93,7 @@ class Pawn < Piece
     deltas = generate_possible_deltas
 
     on_board_moves = on_board(deltas)
-
     self_square_moves = self_squares(on_board_moves, board)
-
     enemy_square_moves = enemy_squares(self_square_moves, board)
   end
 
@@ -125,7 +122,18 @@ class Pawn < Piece
   end
 
   def enemy_squares(self_square_moves, board)
+    self_square_moves.select do |move|
+      y = move[0]
+      x = move[1]
 
+      if board.grid[y][x].nil?
+        true
+      elsif x == self.location[1]
+        false
+      else
+        true
+      end
+    end
   end
 
   #legal moves - white pawns must move up one y only. Can move one diagonal if another piece in there.

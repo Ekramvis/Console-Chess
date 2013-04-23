@@ -7,7 +7,7 @@ class Piece
     @location[0] > 5  ? @player_id = "White" : @player_id = "Black"
   end
 
-  def move(board, stop)
+  def move(board)
   end
 
 end # end Piece class

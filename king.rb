@@ -1,4 +1,4 @@
-class Pawn < Piece
+class King < Piece
 
   attr_accessor :location, :player_id
 
@@ -11,16 +11,16 @@ class Pawn < Piece
     #makes all moves in all directions, also off board
     y = location[0]
     x = location[1]
-    if @player_id == "White"
-      @deltas = [[y-1,x],[y-1,x-1],[y-1,x+1]]
-    else
-      @deltas = [[y+1,x],[y+1,x-1],[y+1,x+1]]
-    end
-    @deltas
+
+    @deltas = [
+        [y-1,x], [y-1,x-1],[y-1,x+1],
+        [y+1,x], [y+1,x-1], [y+1,x+1],
+        [y, x+1], [y, x-1]
+      ]
   end
 
   def display_self
-    print "P|"
+    print "K|"
   end
 
   def move(board)
@@ -32,7 +32,6 @@ class Pawn < Piece
 
     on_board_moves = on_board(deltas)
     self_square_moves = self_squares(on_board_moves, board)
-    enemy_square_moves = enemy_squares(self_square_moves, board)
   end
 
   def on_board(deltas)
@@ -59,28 +58,4 @@ class Pawn < Piece
     end
   end
 
-  def enemy_squares(self_square_moves, board)
-    # pawn has a lot of rules
-    self_square_moves.select do |move|
-      y = move[0]
-      x = move[1]
-
-      if board.grid[y][x].nil? && x != self.location[1]
-        false
-      elsif board.grid[y][x] && x != self.location[1]
-        true
-      elsif board.grid[y][x] && x == self.location[1]
-        false
-      elsif board.grid[y][x].nil? && x == self.location[1]
-        true
-      end
-    end
-  end
-
-end # end Pawn class
-
-
-
-
-
-
+end #end King class

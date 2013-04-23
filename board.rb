@@ -8,7 +8,9 @@ class Board
 
   def fill_board
     piece = Pawn.new([6, 0])
+    king = King.new([7, 4])
     @grid[6][0] = piece
+    @grid[7][4] = king
   end
 
   def display_board

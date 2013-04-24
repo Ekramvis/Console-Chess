@@ -84,7 +84,7 @@ class Board
         possible_moves = piece.move(self)
         possible_moves.each do |move|
 
-          test_board = self.dup
+          test_board = self.deep_dup
           test_board.update_board(piece.location,move)
 
           #is new test_board still in check?
@@ -112,7 +112,20 @@ class Board
   end
 
   def deep_dup
+    new_board = Board.new
+    new_board.grid.each_with_index do |row, y|
+      row.each_index do |x|
+        new_board.grid[y][x] = nil
+      end
+    end
 
+    @grid.each_with_index do |row, y|
+      row.each_index do |x|
+        next if @grid[y][x].nil?
+        new_board.grid[y][x] = @grid[y][x].dup_piece
+      end
+    end
+    new_board
   end
 
 

@@ -77,6 +77,12 @@ class Pawn < Piece
     end
   end
 
+  def dup_piece
+    new_pawn = Pawn.new(self.location)
+    new_pawn.player_id = self.player_id
+    new_pawn
+  end
+
 end # end Pawn class
 
 

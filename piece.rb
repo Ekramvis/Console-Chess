@@ -11,4 +11,7 @@ class Piece
   def move(board)
   end
 
+  def dup_piece
+  end
+
 end # end Piece class

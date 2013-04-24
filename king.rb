@@ -59,4 +59,10 @@ class King < Piece
     end
   end
 
+  def dup_piece
+    new_king = King.new(self.location)
+    new_king.player_id = self.player_id
+    new_king
+  end
+
 end #end King class

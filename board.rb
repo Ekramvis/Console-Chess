@@ -7,14 +7,16 @@ class Board
   end
 
   def fill_board
-    piece = Pawn.new([1, 1])
-    piece1 = Pawn.new([1, 2])
-    piece2 = Pawn.new([1, 3])
-    king = King.new([7, 4])
-    @grid[1][1] = piece
-    @grid[1][2] = piece1
-    @grid[1][3] = piece2
-    @grid[7][4] = king
+    piece = Pawn.new([4, 0])
+    piece1 = Pawn.new([4, 1])
+    piece2 = Pawn.new([5, 1])
+    piece3 = Pawn.new([5, 2])
+    king = King.new([7, 0])
+    @grid[4][0] = piece
+    @grid[4][1] = piece1
+    @grid[5][1] = piece2
+    @grid[5][2] = piece3
+    @grid[7][0] = king
   end
 
   def display_board
@@ -51,9 +53,14 @@ class Board
   end
 
   def check(loc)
+    p self.display_board
     check = false
 
+    # is the enemy @grid[loc[0]][loc[1]]
+    p @grid[loc[0]][loc[1]]
     possible_moves = @grid[loc[0]][loc[1]].move(self)
+
+
     possible_moves.each do |move|
       next if @grid[move[0]][move[1]].nil?
 
@@ -93,11 +100,8 @@ class Board
           end
 
           still_in_check = enemy_pieces.any? do |e_piece|
-            e_piece.any? do |e_move|
-              test_board.check(e_move)
-            end
+            test_board.check(e_piece.location)
           end
-
 
           return false if !still_in_check
         end
@@ -107,6 +111,9 @@ class Board
     #return checkmate #remove "return"
   end
 
+  def deep_dup
+
+  end
 
 
 end #End of board class

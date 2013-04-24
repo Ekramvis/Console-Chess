@@ -11,12 +11,14 @@ class Board
     piece1 = Pawn.new([4, 1])
     piece2 = Pawn.new([5, 1])
     piece3 = Pawn.new([5, 2])
-    king = King.new([7, 0])
+    king = King.new([7, 4])
+    queen = Queen.new([7, 5])
     @grid[4][0] = piece
     @grid[4][1] = piece1
     @grid[5][1] = piece2
     @grid[5][2] = piece3
-    @grid[7][0] = king
+    @grid[7][4] = king
+    @grid[7][5] = queen
   end
 
   def display_board

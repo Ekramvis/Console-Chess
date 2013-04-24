@@ -15,6 +15,7 @@ class Board
     piece5 = Pawn.new([1, 5])
     king = King.new([7, 4])
     queen = Queen.new([7, 5])
+    bishop = Bishop.new([7, 6])
     @grid[4][0] = piece
     @grid[4][1] = piece1
     @grid[5][1] = piece2
@@ -23,6 +24,7 @@ class Board
     @grid[1][5] = piece5
     @grid[7][4] = king
     @grid[7][5] = queen
+    @grid[7][6] = bishop
   end
 
   def display_board

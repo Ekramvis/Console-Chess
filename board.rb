@@ -7,28 +7,41 @@ class Board
   end
 
   def fill_board
-    piece = Pawn.new([4, 0])
-    piece1 = Pawn.new([4, 1])
-    piece2 = Pawn.new([5, 1])
-    piece3 = Pawn.new([5, 2])
-    piece4 = Pawn.new([0, 5])
-    piece5 = Pawn.new([1, 5])
-    king = King.new([7, 4])
-    queen = Queen.new([7, 5])
-    bishop = Bishop.new([7, 6])
-    rook = Rook.new([7, 7])
-    knight = Knight.new([7, 3])
-    @grid[4][0] = piece
-    @grid[4][1] = piece1
-    @grid[5][1] = piece2
-    @grid[5][2] = piece3
-    @grid[0][5] = piece4
-    @grid[1][5] = piece5
-    @grid[7][4] = king
-    @grid[7][5] = queen
-    @grid[7][6] = bishop
-    @grid[7][7] = rook
-    @grid[7][3] = knight
+    @grid[0][0] = Rook.new([0, 0])
+    @grid[0][1] = Knight.new([0, 1])
+    @grid[0][2] = Bishop.new([0, 2])
+    @grid[0][3] = King.new([0, 3])
+    @grid[0][4] = Queen.new([0, 4])
+    @grid[0][5] = Bishop.new([0, 5])
+    @grid[0][6] = Knight.new([0, 6])
+    @grid[0][7] = Rook.new([0, 7])
+
+    @grid[7][0] = Rook.new([7, 0])
+    @grid[7][1] = Knight.new([7, 1])
+    @grid[7][2] = Bishop.new([7, 2])
+    @grid[7][3] = King.new([7, 3])
+    @grid[7][4] = Queen.new([7, 4])
+    @grid[7][5] = Bishop.new([7, 5])
+    @grid[7][6] = Knight.new([7, 6])
+    @grid[7][7] = Rook.new([7, 7])
+
+    @grid[1][0] = Pawn.new([1, 0])
+    @grid[1][1] = Pawn.new([1, 1])
+    @grid[1][2] = Pawn.new([1, 2])
+    @grid[1][3] = Pawn.new([1, 3])
+    @grid[1][4] = Pawn.new([1, 4])
+    @grid[1][5] = Pawn.new([1, 5])
+    @grid[1][6] = Pawn.new([1, 6])
+    @grid[1][7] = Pawn.new([1, 7])
+
+    @grid[6][0] = Pawn.new([6, 0])
+    @grid[6][1] = Pawn.new([6, 1])
+    @grid[6][2] = Pawn.new([6, 2])
+    @grid[6][3] = Pawn.new([6, 3])
+    @grid[6][4] = Pawn.new([6, 4])
+    @grid[6][5] = Pawn.new([6, 5])
+    @grid[6][6] = Pawn.new([6, 6])
+    @grid[6][7] = Pawn.new([6, 7])
   end
 
   def display_board

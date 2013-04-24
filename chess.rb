@@ -8,6 +8,17 @@ require_relative 'rook.rb'
 require_relative 'knight.rb'
 
 
+class Game
+  attr_accessor :board
 
+  def initialize
+    # init 2 player objects
+    @board = Board.new
+    #game_loop
+  end
+
+
+
+end # end Game class
 
 

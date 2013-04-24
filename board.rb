@@ -65,4 +65,48 @@ class Board
     check
   end
 
+  def checkmate(loc)
+    return false if check(loc) == false
+    enemy = @grid[loc[0]][loc[1]].player_id
+
+    @grid.each_with_index do |row, y|
+      row.each_index do |x|
+        piece = @grid[y][x]
+        next if piece.nil?
+        next if piece.player_id == enemy
+        possible_moves = piece.move(self)
+        possible_moves.each do |move|
+
+          test_board = self.dup
+          test_board.update_board(piece.location,move)
+
+          #is new test_board still in check?
+          # return true if *any* enemy has king in check
+          enemy_pieces = []
+          test_board.grid.each_with_index do |row, j|
+            row.each_index do |i|
+              enemy_piece = test_board.grid[j][i]
+              next if enemy_piece.nil?
+              next if enemy_piece.player_id != enemy
+              enemy_pieces << enemy_piece
+            end
+          end
+
+          still_in_check = enemy_pieces.any? do |e_piece|
+            e_piece.any? do |e_move|
+              test_board.check(e_move)
+            end
+          end
+
+
+          return false if !still_in_check
+        end
+      end
+    end
+    true
+    #return checkmate #remove "return"
+  end
+
+
+
 end #End of board class

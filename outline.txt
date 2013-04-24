@@ -6,7 +6,7 @@
 #  end
 #
 #  game loop method
-#    check "checkmate condition" => call to board class
+#    check "checkmate condition" (pass down stop variable)=> call to board class
 #    check "check condition" (pass down stop variable) => call to board class
 #    display board => call to board class
 #

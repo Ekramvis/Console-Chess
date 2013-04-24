@@ -7,9 +7,13 @@ class Board
   end
 
   def fill_board
-    piece = Pawn.new([6, 0])
+    piece = Pawn.new([1, 1])
+    piece1 = Pawn.new([1, 2])
+    piece2 = Pawn.new([1, 3])
     king = King.new([7, 4])
-    @grid[6][0] = piece
+    @grid[1][1] = piece
+    @grid[1][2] = piece1
+    @grid[1][3] = piece2
     @grid[7][4] = king
   end
 
@@ -44,6 +48,21 @@ class Board
   def validate_move(start, stop)
     valid_moves = @grid[start[0]][start[1]].move(self)
     valid_moves.include?(stop)
+  end
+
+  def check(loc)
+    check = false
+
+    possible_moves = @grid[loc[0]][loc[1]].move(self)
+    possible_moves.each do |move|
+      next if @grid[move[0]][move[1]].nil?
+
+      if @grid[move[0]][move[1]].king == true && @grid[move[0]][move[1]].player_id != @grid[loc[0]][loc[1]].player_id
+        check = true
+      end
+    end
+
+    check
   end
 
 end #End of board class

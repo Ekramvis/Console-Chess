@@ -7,7 +7,7 @@
 #
 #  game loop method
 #    check "checkmate condition" => call to board class
-#    check "check condition" => call to board class
+#    check "check condition" (pass down stop variable) => call to board class
 #    display board => call to board class
 #
 #    flip switch for Player object => Game variable

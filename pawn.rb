@@ -1,6 +1,6 @@
 class Pawn < Piece
 
-  attr_accessor :location, :player_id
+  attr_accessor :location, :player_id, :king
 
   def initialize(location)
     super(location)

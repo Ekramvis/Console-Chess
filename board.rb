@@ -17,6 +17,7 @@ class Board
     queen = Queen.new([7, 5])
     bishop = Bishop.new([7, 6])
     rook = Rook.new([7, 7])
+    knight = Knight.new([7, 3])
     @grid[4][0] = piece
     @grid[4][1] = piece1
     @grid[5][1] = piece2
@@ -27,6 +28,7 @@ class Board
     @grid[7][5] = queen
     @grid[7][6] = bishop
     @grid[7][7] = rook
+    @grid[7][3] = knight
   end
 
   def display_board

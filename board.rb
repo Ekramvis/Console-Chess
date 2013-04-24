@@ -78,13 +78,9 @@ class Board
   end
 
   def check(loc)
-    p self.display_board
     check = false
 
-    # is the enemy @grid[loc[0]][loc[1]]
-    p @grid[loc[0]][loc[1]]
     possible_moves = @grid[loc[0]][loc[1]].move(self)
-
 
     possible_moves.each do |move|
       next if @grid[move[0]][move[1]].nil?
@@ -95,6 +91,29 @@ class Board
     end
 
     check
+  end
+
+  def still_in_check(move)
+    test_board = self.deep_dup
+    test_board.update_board(move[0],move[1])
+
+    player_in_check = test_board.grid[move[1][0]][move[1][1]].player_id
+
+    enemy_pieces = []
+    test_board.grid.each_with_index do |row, j|
+      row.each_index do |i|
+        enemy_piece = test_board.grid[j][i]
+        next if enemy_piece.nil?
+        next if enemy_piece.player_id == player_in_check
+        enemy_pieces << enemy_piece
+      end
+    end
+
+    still_in_check = enemy_pieces.any? do |e_piece|
+      test_board.check(e_piece.location)
+    end
+
+    return false if !still_in_check
   end
 
   def checkmate(loc)

@@ -1,4 +1,5 @@
 require_relative 'board.rb'
+require_relative 'player.rb'
 require_relative 'piece.rb'
 require_relative 'pawn.rb'
 require_relative 'king.rb'
@@ -17,6 +18,8 @@ class Game
     #game_loop
   end
 
+  def game_loop
+  end
 
 
 end # end Game class

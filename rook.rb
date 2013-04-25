@@ -14,7 +14,7 @@ class Rook < Piece
 
 
   def display_self
-    print "R|"
+    print "R|" # REV: unicode ♖ / ♜
   end
 
   def move(board)

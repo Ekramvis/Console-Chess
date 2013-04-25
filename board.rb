@@ -7,6 +7,7 @@ class Board
   end
 
   def fill_board
+
     @grid[0][0] = Rook.new([0, 0])
     @grid[0][1] = Knight.new([0, 1])
     @grid[0][2] = Bishop.new([0, 2])
@@ -25,6 +26,7 @@ class Board
     @grid[7][6] = Knight.new([7, 6])
     @grid[7][7] = Rook.new([7, 7])
 
+    # REV: 8.times do { |i| grid[1][i] = Pawn.new([1, i]) }
     @grid[1][0] = Pawn.new([1, 0])
     @grid[1][1] = Pawn.new([1, 1])
     @grid[1][2] = Pawn.new([1, 2])
@@ -34,6 +36,7 @@ class Board
     @grid[1][6] = Pawn.new([1, 6])
     @grid[1][7] = Pawn.new([1, 7])
 
+    # REV: 8.times do { |i| grid[2][i] = Pawn.new([2, i]) }
     @grid[6][0] = Pawn.new([6, 0])
     @grid[6][1] = Pawn.new([6, 1])
     @grid[6][2] = Pawn.new([6, 2])
@@ -46,12 +49,12 @@ class Board
 
   def display_board
     @grid.each_with_index do |row, y|
-      puts ""
+      puts "" # REV: "" unecessary, puts by itself makes a new line
       row.each_with_index do |square, x|
         if @grid[y][x]
           print @grid[y][x].display_self
         else
-          print "_|"
+          print "_|" # REV: unicode just in case you want to change later: ☐ ▣ ⧈ 
         end
       end
     end

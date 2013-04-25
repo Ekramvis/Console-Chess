@@ -18,7 +18,7 @@ class Queen < Piece
 
 
   def display_self
-    print "Q|"
+    print "Q|" # REV: unicode ♕ / ♛
   end
 
   def move(board)
@@ -31,6 +31,8 @@ class Queen < Piece
     moves.flatten(1)
   end
 
+  # REV: for queen instead of writing everything out you can do:
+  # REV: Bishop.new.generate_possible_moves(board,dir) + Rook.new.generate_possible_moves(board,dir)
   def generate_possible_moves(board, dir)
     y = self.location[0]
     x = self.location[1]

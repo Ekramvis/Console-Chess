@@ -17,8 +17,8 @@ class Game
     @p2 = Player.new
     @board = Board.new
     @current_player = @p2
-    @move = [[1,0],[1,0]]
-    turn_loop
+    @move = [[1,0],[1,0]] # REV: imo shouldn't be hardcoded
+    turn_loop # REV: why is this in initialize?
   end
 
   def turn_loop
@@ -26,11 +26,13 @@ class Game
       @board.display_board
       @current_player == @p1 ? @p2 : @p1
 
-      if @board.check(@move[1])
+      if @board.check(@move[1]) # REV: would be clearer with a check function and a regular
+        # REV: move function (and private too b/c you only need turn_Loop as public)
+        # REV: ex: @board.check(@move[1]) ? check : regular
         until @board.validate_move(@move[0], @move[1]) && !@board.check(@move[1])
           puts "Please enter a start, stop"
-          @move = @current_player.input
-          @move = @current_player.input
+          @move = @current_player.input # REV: repetition is bad
+          @move = @current_player.input # REV: repetition is bad
           break unless @board.still_in_check?(@move)
           puts "Still in check."
         end

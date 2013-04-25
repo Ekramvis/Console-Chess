@@ -1,6 +1,7 @@
 class Player
 
   def input
+    # REV: maybe implement input like this: 'A4,H4', to be easier on the player
     puts "Enter a start position"
     start = gets.chomp.split(" ")
     start[0] = start[0].to_i

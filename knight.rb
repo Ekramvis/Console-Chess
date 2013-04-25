@@ -21,7 +21,7 @@ class Knight < Piece
   end
 
   def display_self
-    print "H|"
+    print "H|" # REV: unicode ♘ / ♞
   end
 
   def move(board)
@@ -32,7 +32,7 @@ class Knight < Piece
     deltas = generate_deltas
 
     on_board_moves = on_board(deltas)
-    self_square_moves = self_squares(on_board_moves, board)
+    self_square_moves = self_squares(on_board_moves, board) # REV: variable assignement useless
   end
 
   def on_board(deltas)

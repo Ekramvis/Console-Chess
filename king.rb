@@ -5,7 +5,7 @@ class King < Piece
   def initialize(location)
     super(location)
     generate_deltas
-    @king = true
+    @king = true # REV: can do x = ExampleClass.new; x.class == ExampleClass; even if ExampleClass < ExampleParent
   end
 
   def generate_deltas
@@ -21,7 +21,7 @@ class King < Piece
   end
 
   def display_self
-    print "K|"
+    print "K|" # REV: unicode ♔ / ♚
   end
 
   def move(board)
@@ -32,7 +32,7 @@ class King < Piece
     deltas = generate_deltas
 
     on_board_moves = on_board(deltas)
-    self_square_moves = self_squares(on_board_moves, board)
+    self_square_moves = self_squares(on_board_moves, board) # REV: don't need to assign it to a variable
   end
 
   def on_board(deltas)

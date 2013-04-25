@@ -20,7 +20,7 @@ class Pawn < Piece
   end
 
   def display_self
-    print "P|"
+    print "P|" # REV: unicode ♙ / ♟
   end
 
   def move(board)
@@ -32,7 +32,7 @@ class Pawn < Piece
 
     on_board_moves = on_board(deltas)
     self_square_moves = self_squares(on_board_moves, board)
-    enemy_square_moves = enemy_squares(self_square_moves, board)
+    enemy_square_moves = enemy_squares(self_square_moves, board) # REV: variable assignment useless
   end
 
   def on_board(deltas)

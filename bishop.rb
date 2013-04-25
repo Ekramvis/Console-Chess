@@ -1,6 +1,6 @@
 class Bishop < Piece
 
-  attr_accessor :location, :player_id, :king
+  attr_accessor :location, :player_id, :king # REV: repetition
 
   def initialize(location)
     super(location)
@@ -13,8 +13,8 @@ class Bishop < Piece
   end
 
 
-  def display_self
-    print "B|"
+  def display_self # REV: why not just display
+    print "B|" # REV: unicode ♗ / ♝, I can't tell the difference between pieces when playing
   end
 
   def move(board)
@@ -33,6 +33,7 @@ class Bishop < Piece
 
     possible_moves = []
 
+    # REV: cool usage of procs!
     case dir
     when :left
       space_to_go = x - 0
@@ -84,7 +85,6 @@ class Bishop < Piece
 
     possible_moves
   end
-
 
   def dup_piece
     new_bishop = Bishop.new(self.location)

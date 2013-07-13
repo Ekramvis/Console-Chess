@@ -1,6 +1,7 @@
 class Player
 
   def input
+    puts 
     puts "Enter a start position"
     start = gets.chomp.split(" ")
     start[0] = start[0].to_i

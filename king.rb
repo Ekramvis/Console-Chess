@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class King < Piece
 
   attr_accessor :location, :player_id, :king

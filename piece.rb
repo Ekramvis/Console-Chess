@@ -1,6 +1,6 @@
 class Piece
 
-  attr_accessor :location, :king
+  attr_accessor :location, :king, :player_id
 
   def initialize(location)
     @location = location #array of [y, x]

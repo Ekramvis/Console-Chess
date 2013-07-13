@@ -9,8 +9,8 @@ class Knight < Piece
 
   def generate_deltas
     #makes all moves in all directions, also off board
-    y = location[0]
-    x = location[1]
+    y = self.location[0]
+    x = self.location[1]
 
     @deltas = [
       [y + 1, x + 2], [y + 1, x - 2],
@@ -20,8 +20,8 @@ class Knight < Piece
       ]
   end
 
-  def display_self
-    print "H|"
+  def render
+    print " H" + @player_id[0].downcase + " |"
   end
 
   def move(board)

@@ -13,8 +13,8 @@ class Rook < Piece
   end
 
 
-  def display_self
-    print "R|"
+  def render
+    print " R" + @player_id[0].downcase + " |"
   end
 
   def move(board)

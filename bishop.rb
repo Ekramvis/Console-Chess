@@ -13,8 +13,8 @@ class Bishop < Piece
   end
 
 
-  def display_self
-    print "B|"
+  def render
+    print " B" + @player_id[0].downcase + " |"
   end
 
   def move(board)

@@ -1,26 +1,36 @@
 class Pawn < Piece
 
-  attr_accessor :location, :player_id, :king
+  attr_accessor :location, :player_id, :king, :first_move
 
   def initialize(location)
     super(location)
     generate_deltas
+    @first_move = true
   end
 
   def generate_deltas
     #makes all moves in all directions, also off board
-    y = location[0]
-    x = location[1]
+    y = self.location[0]
+    x = self.location[1]
     if @player_id == "White"
       @deltas = [[y-1,x],[y-1,x-1],[y-1,x+1]]
+      if @first_move 
+        @deltas << [y-2,x] 
+        @first_move = false
+      end
     else
       @deltas = [[y+1,x],[y+1,x-1],[y+1,x+1]]
+      if @first_move 
+        @deltas << [y+2,x] 
+        @first_move = false
+      end
     end
+
     @deltas
   end
 
-  def display_self
-    print "P|"
+  def render
+    print " P" + @player_id[0].downcase + " |"
   end
 
   def move(board)

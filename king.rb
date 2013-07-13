@@ -1,8 +1,6 @@
-# encoding: utf-8
-
 class King < Piece
 
-  attr_accessor :location, :player_id, :king
+  attr_accessor :location, :king
 
   def initialize(location)
     super(location)
@@ -12,8 +10,8 @@ class King < Piece
 
   def generate_deltas
     #makes all moves in all directions, also off board
-    y = location[0]
-    x = location[1]
+    y = self.location[0]
+    x = self.location[1]
 
     @deltas = [
         [y-1,x], [y-1,x-1],[y-1,x+1],
@@ -22,8 +20,8 @@ class King < Piece
       ]
   end
 
-  def display_self
-    print "K|"
+  def render
+    print " K" + @player_id[0].downcase + " |"
   end
 
   def move(board)
@@ -35,6 +33,7 @@ class King < Piece
 
     on_board_moves = on_board(deltas)
     self_square_moves = self_squares(on_board_moves, board)
+    check_safe_moves = check_safe(self_square_moves, board)
   end
 
   def on_board(deltas)
@@ -58,6 +57,25 @@ class King < Piece
       else
         true
       end
+    end
+  end
+
+  def check_safe(self_square_moves, board)
+    enemy_pieces = board.grid.flatten.compact.select { |piece| (piece.player_id != self.player_id) }
+    enemy_moves = []
+
+    enemy_pieces.each do |enemy|
+      if enemy.king
+        enemy_moves += enemy.generate_deltas 
+      else
+        enemy_moves += enemy.move(board)
+      end
+    end
+
+    enemy_moves.uniq!
+
+    self_square_moves.select do |move|
+      !enemy_moves.include?(move)
     end
   end
 

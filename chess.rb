@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require_relative 'board.rb'
 require_relative 'player.rb'
 require_relative 'piece.rb'
@@ -15,23 +13,24 @@ class Game
   attr_accessor :board
 
   def initialize
-    @p1 = Player.new
-    @p2 = Player.new
+    @p1 = Player.new("White")
+    @p2 = Player.new("Black")
     @board = Board.new
     @current_player = @p2
-    @move = [[1,0],[1,0]]
+    @move = [[0,0],[0,0]]
     turn_loop
   end
 
   def turn_loop
     until @board.checkmate(@move[1])
       @board.display_board
-      @current_player == @p1 ? @p2 : @p1
+      @current_player = @current_player == @p1 ? @p2 : @p1
 
       if @board.check(@move[1])
-        until @board.validate_move(@move[0], @move[1]) && !@board.check(@move[1])
-          puts "Please enter a start, stop"
-          @move = @current_player.input
+        last_move = @move[1]
+        puts @current_player.color + ", you are in check."
+        until @board.validate_move(@move[0], @move[1], @current_player.color) && !@board.check(last_move)
+          2.times { puts "" }
           @move = @current_player.input
           break unless @board.still_in_check?(@move)
           puts "Still in check."
@@ -39,10 +38,12 @@ class Game
         puts "you got out of check!"
 
       else
-        puts "Please enter a start, stop"
+        2.times { puts "" }
         @move = @current_player.input
-        until @board.validate_move(@move[0], @move[1])
-          puts "Not valid, try again"
+        until @board.validate_move(@move[0], @move[1], @current_player.color)
+          puts ""
+          puts "Not a valid move, please try again"
+          puts ""
           @move = @current_player.input
         end
 
@@ -50,10 +51,11 @@ class Game
       @board.update_board(@move[0], @move[1])
     end
 
-    puts "Game is over"
+    @board.display_board
+    puts "The game is over: " + @current_player.color + " wins!"
   end
 
+end 
 
-end # end Game class
 
-
+Game.new

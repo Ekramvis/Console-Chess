@@ -17,8 +17,8 @@ class Queen < Piece
   end
 
 
-  def display_self
-    print "Q|"
+  def render
+    print " Q" + @player_id[0].downcase + " |"
   end
 
   def move(board)

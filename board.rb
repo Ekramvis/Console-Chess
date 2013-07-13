@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Board
   attr_accessor :grid
 
@@ -27,36 +25,55 @@ class Board
     @grid[7][6] = Knight.new([7, 6])
     @grid[7][7] = Rook.new([7, 7])
 
-    @grid[1][0] = Pawn.new([1, 0])
-    @grid[1][1] = Pawn.new([1, 1])
-    @grid[1][2] = Pawn.new([1, 2])
-    @grid[1][3] = Pawn.new([1, 3])
-    @grid[1][4] = Pawn.new([1, 4])
-    @grid[1][5] = Pawn.new([1, 5])
-    @grid[1][6] = Pawn.new([1, 6])
-    @grid[1][7] = Pawn.new([1, 7])
+    # @grid[1][0] = Pawn.new([1, 0])
+    # @grid[1][1] = Pawn.new([1, 1])
+    # @grid[1][2] = Pawn.new([1, 2])
+    # @grid[1][3] = Pawn.new([1, 3])
+    # @grid[1][4] = Pawn.new([1, 4])
+    # @grid[1][5] = Pawn.new([1, 5])
+    # @grid[1][6] = Pawn.new([1, 6])
+    # @grid[1][7] = Pawn.new([1, 7])
 
-    @grid[6][0] = Pawn.new([6, 0])
-    @grid[6][1] = Pawn.new([6, 1])
-    @grid[6][2] = Pawn.new([6, 2])
-    @grid[6][3] = Pawn.new([6, 3])
-    @grid[6][4] = Pawn.new([6, 4])
-    @grid[6][5] = Pawn.new([6, 5])
-    @grid[6][6] = Pawn.new([6, 6])
-    @grid[6][7] = Pawn.new([6, 7])
+    # @grid[6][0] = Pawn.new([6, 0])
+    # @grid[6][1] = Pawn.new([6, 1])
+    # @grid[6][2] = Pawn.new([6, 2])
+    # @grid[6][3] = Pawn.new([6, 3])
+    # @grid[6][4] = Pawn.new([6, 4])
+    # @grid[6][5] = Pawn.new([6, 5])
+    # @grid[6][6] = Pawn.new([6, 6])
+    # @grid[6][7] = Pawn.new([6, 7])
   end
 
-  def display_board
+def display_board
+    puts ""
+    print "      "
+    39.times { print "_" }
+    puts ""
+    y_axis = 0
     @grid.each_with_index do |row, y|
+      print "     |"
+
+      8.times { print "    |" }
       puts ""
-      row.each_with_index do |square, x|
-        if @grid[y][x]
-          print @grid[y][x].display_self
+      
+      print "  " + (8 - y_axis).to_s + "  |"
+      y_axis += 1
+
+      row.each_index do |x|
+        if @grid[y][x] == nil 
+          print "    |"
         else
-          print "_|"
+          @grid[y][x].render
         end
       end
+      puts ""
+      print "     |"
+      8.times { print "____|" }
+      puts ""
     end
+    puts ""
+    puts "        a    b    c    d    e    f    g    h"
+    puts ""
   end
 
   def update_board(start, stop)
@@ -74,7 +91,10 @@ class Board
     piece.location = [y2, x2]
   end
 
-  def validate_move(start, stop)
+  def validate_move(start, stop, player_id)
+    return false if start == [10,10] || stop == [10,10] 
+    return false if  @grid[start[0]][start[1]] == nil
+    return false if @grid[start[0]][start[1]].player_id != player_id
     valid_moves = @grid[start[0]][start[1]].move(self)
     valid_moves.include?(stop)
   end
@@ -95,7 +115,7 @@ class Board
     check
   end
 
-  def still_in_check(move)
+  def still_in_check?(move)
     test_board = self.deep_dup
     test_board.update_board(move[0],move[1])
 
@@ -115,7 +135,9 @@ class Board
       test_board.check(e_piece.location)
     end
 
-    return false if !still_in_check
+    return true if still_in_check
+
+    false
   end
 
   def checkmate(loc)

@@ -12,7 +12,6 @@ class Rook < Piece
     ]
   end
 
-
   def render
     print " R" + @player_id[0].downcase + " |"
   end
